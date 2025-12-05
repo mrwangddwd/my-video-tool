@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>暗绿流星星空页 </title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            height: 100vh;
-            background: linear-gradient(to bottom, #0b1a17, #1a2f38, #2b334a);
-            overflow: hidden;
-            position: relative;
-        }
-        /* 星星，闪烁效果 */
-       .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 2s infinite alternate;
-        }
-        @keyframes twinkle {
-            0% { opacity: 0.3; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
-        /* 流星，快速划过 */
-       .meteor {
-            position: absolute;
-            width: 80px;
-            height: 2px;
-            background: linear-gradient(to right, transparent, white, transparent);
-            animation: meteorMove 3s linear infinite;
-        }
-        @keyframes meteorMove {
-            from { transform: translateX(-100px) rotate(15deg); }
-            to { transform: translateX(120vw) rotate(15deg); }
-        }
-    </style>
-    <script>
-        window.onload = function() {
-            // 生成100个星星
-            for (let i = 0; i < 100; i++) {
-                let star = document.createElement('div');
-                star.className ='star';
-                star.style.left = Math.random() * 100 + 'vw';
-                star.style.top = Math.random() * 100 + 'vh';
-                star.style.animationDelay = Math.random() * 3 +'s';
+  <meta charset="UTF-8">
+  <title>终极流星星空 </title>
+  <style>
+    body { margin: 0; padding: 0; background: #0b0d17; overflow: hidden; }
+    canvas { display: block; width: 100vw; height: 100vh; }
+  </style>
+  <script>
+    window.onload = function() {
+      const canvas = document.createElement('canvas');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      document.body.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+
+      const stars = [];
+      for (let i = 0; i < 200; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 3 + 1,
+          opacity: Math.random() * 0.7 + 0.3,
+          speed: Math.random() * 0.5 + 0.1
+        });
+      }
+
+      const meteors = [];
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 画星星
+        stars.forEach(star => {
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size, 0, 2 * Math.PI);
+          ctx.fillStyle = `rgba(255,255,255,${star.opacity})`;
+          ctx.fill();
+          star.y += star.speed;
+          if (star.y > canvas.height) star.y = 0;
+        });
+
+        // 生成流星
+        if (Math.random() < 0.02) {
+          meteors.push({
+            x: -100,
+            y: Math.random() * canvas.height,
+            angle: Math.random() * 0.3 + 0.1,
+            length: Math.random()
