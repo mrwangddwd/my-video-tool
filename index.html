@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>炫酷星空页 </title>
+    <title>暗绿流星星空页 </title>
     <style>
         body {
             margin: 0;
@@ -13,9 +13,11 @@
             overflow: hidden;
             position: relative;
         }
-        /* 星星样式，闪烁效果 */
+        /* 星星，闪烁效果 */
        .star {
             position: absolute;
+            width: 2px;
+            height: 2px;
             background: white;
             border-radius: 50%;
             animation: twinkle 2s infinite alternate;
@@ -24,24 +26,25 @@
             0% { opacity: 0.3; transform: scale(0.8); }
             100% { opacity: 1; transform: scale(1.2); }
         }
-        /* 流星样式，快速划过 */
+        /* 流星，快速划过 */
        .meteor {
             position: absolute;
-            width: 50px;
+            width: 80px;
             height: 2px;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
-            animation: meteorFly 3s linear infinite;
+            background: linear-gradient(to right, transparent, white, transparent);
+            animation: meteorMove 3s linear infinite;
         }
-        @keyframes meteorFly {
-            from { transform: translateX(-100px) rotate(20deg); }
-            to { transform: translateX(120vw) rotate(20deg); }
+        @keyframes meteorMove {
+            from { transform: translateX(-100px) rotate(15deg); }
+            to { transform: translateX(120vw) rotate(15deg); }
         }
     </style>
     <script>
         window.onload = function() {
-            // 生成随机星星
+            // 生成100个星星
             for (let i = 0; i < 100; i++) {
                 let star = document.createElement('div');
                 star.className ='star';
-                let x = Math.random() * 100;
-                let y = Math.random() *
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animationDelay = Math.random() * 3 +'s';
