@@ -1,1 +1,47 @@
-<html><head><meta charset="UTF-8"><title>炫酷背景页 </title><style>body {margin: 0;padding: 0;width: 100vw;height: 100vh;background: linear-gradient(to bottom, #0b0d17, #1a1f38, #2b335a);background-size: 100% 100%;overflow: hidden;}/* 星星特效，用伪元素做简单光点 */body::before {content: "";position: absolute;width: 2px;height: 2px;background: white;box-shadow:40px 70px white,120px 30px white,200px 80px white,300px 50px white,380px 100px white,450px 60px white;animation: twinkle 3s infinite alternate;}@keyframes twinkle {0% { opacity: 0.3; transform: scale(0.8); }100% { opacity: 1; transform: scale(1.2); }}</style><script>// 可以再加些动态星星生成的JS，不过先看这版效果</script></head><body><h1 style="color:#fff; text-align:center; padding-top:100px;">Hello World！这是我的页面 </h1><button style="display:block; margin:50px auto; padding:10px 20px; font-size:16px; background:#4CAF50; color:#fff; border:none; border-radius:5px; cursor:pointer;" onclick="alert('页面部署成功啦！')">点我看看 </button></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>炫酷星空页 </title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(to bottom, #0b1a17, #1a2f38, #2b334a);
+            overflow: hidden;
+            position: relative;
+        }
+        /* 星星样式，闪烁效果 */
+       .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+        /* 流星样式，快速划过 */
+       .meteor {
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+            animation: meteorFly 3s linear infinite;
+        }
+        @keyframes meteorFly {
+            from { transform: translateX(-100px) rotate(20deg); }
+            to { transform: translateX(120vw) rotate(20deg); }
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            // 生成随机星星
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement('div');
+                star.className ='star';
+                let x = Math.random() * 100;
+                let y = Math.random() *
